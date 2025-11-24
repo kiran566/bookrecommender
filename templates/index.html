@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <title>Book Recommender System</title>
+
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: #1abc9c !important;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 15px;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+        }
+        .card-img-top {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        h1 {
+            color: #1abc9c;
+            margin-bottom: 40px;
+        }
+        .card-body p, .card-body h5 {
+            color: #f0f0f0;
+        }
+        @media (max-width: 768px) {
+            .col-md-3 {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">BOOK RECOMMENDER</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recommend">Recommend</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1 class="text-center">TOP 50 BOOKS</h1>
+
+    <div class="row">
+        {% for i in range(book_names|length) %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card bg-dark h-100 shadow-lg">
+                    <img class="card-img-top" src="{{ images[i] }}" alt="Book Cover" style="height: 300px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book_names[i] }}</h5>
+                        <p class="card-text"><strong>Author:</strong> {{ authors[i] }}</p>
+                        <p class="card-text"><strong>Votes:</strong> {{ votes[i] }}</p>
+                        <p class="card-text"><strong>Rating:</strong> {{ avg_rating[i] }}</p>
+                    </div>
+                </div>
+            </div>
+
+            {% if (i + 1) % 4 == 0 %}
+                </div><div class="row">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>
